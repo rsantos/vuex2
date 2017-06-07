@@ -1,4 +1,5 @@
-import Vue from 'vue'
+import Vue from 'vue';
+import './filters';
 import {Time} from './time';
 import _ from 'lodash';
 
@@ -18,7 +19,7 @@ let appComponent = Vue.extend({
               <thead>
                 <tr>
                   <th v-for="coluna in colunas">
-                    <a @click="sortBy(coluna)">{{coluna | ucwords}}</a>
+                    <a @click="sortBy(coluna)" style="cursor:pointer;">{{coluna | ucwords}}</a>
                   </th>
                 </tr>
               </thead>
@@ -135,14 +136,6 @@ let appComponent = Vue.extend({
       return _.filter(colecao, item => {
         return item.nome.indexOf(this.filter) >= 0;
       });
-    }
-  },
-  filters: {
-    saldo(time){
-      return time.gm - time.gs;
-    },
-    ucwords(value){
-      return value.charAt(0).toUpperCase() + value.slice(1);
     }
   }
 });
