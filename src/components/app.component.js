@@ -13,14 +13,18 @@ export default {
   template: `
     <div class="container">
         <div class="row">
-            <h3>Campeonato Brasileiro - Série A</h3>
-            <div v-show="view == 'tabela'">
+            <h3>Campeonato Brasileiro - Série A 2016</h3>
+            <a class="btn btn-primary" @click="showTabela">Ver tabela</a>
+            <a class="btn btn-primary" @click="showNovoJogo">Novo jogo</a>
+            <a class="btn btn-primary" @click="showZona">Ver zona</a>
+            <br /><br />
+            <div v-if="view == 'tabela'">
                 <time-list></time-list>
             </div>
-            <div v-show="view == 'novojogo'">
+            <div v-if="view == 'novojogo'">
                 <time-jogo></time-jogo>
             </div>
-            <div v-show="view == 'zona'">
+            <div v-if="view == 'zona'">
                 <time-zona></time-zona>
             </div>
         </div>
@@ -30,5 +34,16 @@ export default {
     view(){
         return store.state.view;
     }    
+  },
+  methods: {
+    showTabela(){
+      store.commit('show-time-list');
+    },
+    showNovoJogo(){
+      store.commit('show-time-novojogo');
+    },
+    showZona(){
+      store.commit('show-time-zona');
+    },
   }
 };
