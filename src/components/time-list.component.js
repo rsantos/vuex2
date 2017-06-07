@@ -31,6 +31,9 @@ export default {
         </table>
     </div>
   `,
+  created(){
+    store.dispatch('load-times');
+  },
   data(){
     return {
       order: {
@@ -43,8 +46,7 @@ export default {
   },
   methods: {
     showNovoJogo(){
-        event.$emit('show-time-novojogo');
-        event.$emit('get-times', this.times);
+      store.commit('show-time-novojogo');
     },
     sortBy(coluna){
       this.order.keys = coluna;

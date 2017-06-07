@@ -1,3 +1,5 @@
+import store from '../store';
+
 export default {
   template: `
     <div>
@@ -21,6 +23,9 @@ export default {
         </form>
     </div>
   `,
+  mounted(){
+    this.initJogo(store.state.times);
+  },
   data(){
     return {
         novoJogo: {
@@ -38,11 +43,14 @@ export default {
   methods: {
     fimJogo(){
       let timeAdversario = this.novoJogo.fora.time,
+          timeCasa = this.novoJogo.casa.time,
           gols  = +this.novoJogo.casa.gols,
           golsAdversario  = +this.novoJogo.fora.gols;
 
-      this.novoJogo.casa.time.fimJogo(timeAdversario, gols, golsAdversario);
-      event.$emit('show-time-list');
+      timeCasa.fimJogo(timeAdversario, gols, golsAdversario);
+      store.commit('update', timeCasa);
+      store.commit('update', timeAdversario);
+      store.commit('show-time-list');
     },
     initJogo(times){
       let indexCasa = Math.floor(Math.random() * 20),
